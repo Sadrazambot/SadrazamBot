@@ -7,9 +7,16 @@ TOKEN = os.getenv("BOT_TOKEN")
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("سلام 👋 من ربات صدر اعظم هستم")
 
-app = ApplicationBuilder().token(TOKEN).build()
+def main():
+    if not TOKEN:
+        print("BOT_TOKEN is missing!")
+        return
 
-app.add_handler(CommandHandler("start", start))
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
 
-print("Bot is running...")
-app.run_polling()
+    print("Bot is running...")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
